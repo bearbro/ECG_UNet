@@ -5,6 +5,7 @@
 * data_preproc_tianchi.py 处理数据
 * train_my.py 训练模型
 * test_a_sig_my.py 可视化预测结果
+* Unet.py 添加crf层得到Unet\_crf 模型
 
 
 # 运行前需要做的事
