@@ -3,6 +3,7 @@
 # 我写的代码：
 * data_preproc_ccdd.py   处理数据
 * data_preproc_tianchi.py 处理数据
+* LoadBatches1D_my.py 读取数据
 * train_my.py 训练模型
 * test_a_sig_my.py 可视化预测结果
 * Unet.py 添加crf层得到Unet\_crf 模型
