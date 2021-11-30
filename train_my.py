@@ -147,7 +147,19 @@ r_sum_dict = [0] * 4
 for xy in tqdm(G2):
     x, y = xy
     y_pred = model.predict(x)
+
+    # 处理 0.25
+    del_idx=[]
+    for si in range(len(y_pred)):
+        del_idx.append([])
+        for i in range(1, len(y_pred[si])):
+            if max(y_pred[si][i])==0.25:
+                del_idx[si].append(i)
     y_pred = np.argmax(y_pred, axis=-1)
+    for si in range(len(y_pred)):
+        for i in del_idx[si]:
+            y_pred[si][i]=y_pred[si][i-1]
+
     y = np.argmax(y, axis=-1)
     for i in range(len(r_dict)):
         r_dict[i] += np.sum((y == y_pred) & (y == i))

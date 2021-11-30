@@ -77,6 +77,23 @@ a_true = np.zeros(shape=a_pred.shape)
 for idx, v in enumerate(a_seg):
     a_true[0, idx, int(v)] = 1
 
+def del_1_4(x):
+    for i in range(1,len(x)):
+        if x[i]==0.25:
+            x[i]=x[i-1]
+    return x
+
+def plot_1_4(a_sig, a_pred, xy,title):
+    plt.subplot(xy)
+    plt.plot(a_sig[0, :, 0])
+    plt.grid(True)
+    plt.title(title)
+
+    plt.plot(del_1_4(a_pred[0, :, 0]), 'k')
+    plt.plot(del_1_4(a_pred[0, :, 1]), 'b')
+    plt.plot(del_1_4(a_pred[0, :, 2]), 'r')
+    plt.plot(del_1_4(a_pred[0, :, 3]), 'g')
+    plt.legend(['Sig', 'Background', 'P', 'R', 'T'], loc='lower right')
 
 def plot(a_sig, a_pred, xy,title):
     plt.subplot(xy)
@@ -99,5 +116,19 @@ plot(a_sig, a_true, 212,title=title+'true')
 dir_path="examples"
 if not os.path.exists(dir_path):
     os.mkdir(dir_path)
-plt.savefig(os.path.join(dir_path,"%s.png"%title))
-# plt.show()
+# plt.savefig(os.path.join(dir_path,"%s.png"%title))
+plt.show()
+
+
+title='%s-%s-%s' % (select[:-4],dateSet, tag)
+plt.figure(figsize=(28, 12))
+
+plot_1_4(a_sig, a_pred, 211,title=title+'-pred')
+
+plot(a_sig, a_true, 212,title=title+'true')
+
+dir_path="examples"
+if not os.path.exists(dir_path):
+    os.mkdir(dir_path)
+# plt.savefig(os.path.join(dir_path,"%s.png"%title))
+plt.show()
