@@ -105,7 +105,7 @@ def do_preproc(files, X_path, Y_path, sig_key):
 
         # write
         idx = 0
-        while (idx + 1) * 1800 <= len(x):# 最后一段长度不一定
+        while (idx + 1) * 1800 <= len(x):# 最后一段长度小于1800的直接舍弃
             xi = x[idx * 1800:(idx + 1) * 1800]
             yi = y[idx * 1800:(idx + 1) * 1800]
             xi_path = os.path.join(X_path, "%s-%d.npy" % (name, idx))
